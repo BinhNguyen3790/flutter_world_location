@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_world_location/services/world_time.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -12,37 +9,31 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  void getTime() async {
-    Response response = await get(
-      Uri.parse(
-        'https://script.google.com/macros/s/AKfycbyd5AcbAnWi2Yn0xhFRbyzS4qMq1VucMVgVvhul5XqS9HkAyJY/exec?tz=Europe/London',
-      ),
+
+  String time = "loading";
+
+  void setupWorldTime() async{
+    WorldTime instance = WorldTime(
+      location: "Berlin",
+      flag: "germany.png",
+      url: "Europe/London",
     );
-    Map data = jsonDecode(response.body);
-    print(data);
-    String datetime = data["fulldate"];
-    String offset = datetime.split("+").last.trim().substring(0,2);
-    print(datetime);
-    print(offset);
-    DateFormat format = DateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
-    try {
-      DateTime now = format.parse(datetime);
-      print(now);
-      now=now.add(Duration(hours: int.parse(offset)));
-    } catch (e) {
-      print("Error: $e");
-    }
+    await instance.getTime();
+    print(instance.time);
+    setState(() {
+      time = instance.time;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    getTime();
+    setupWorldTime();
     print("initState function");
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("loading page"));
+    return Scaffold(body: Padding(padding: EdgeInsets.all(50),child: Text(time),));
   }
 }
