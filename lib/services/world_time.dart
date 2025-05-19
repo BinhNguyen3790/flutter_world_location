@@ -22,12 +22,12 @@ class WorldTime {
       // print(data);
       String datetime = data["fulldate"];
       String offset = datetime.split("+").last.trim().substring(0, 2);
-      // print(datetime);
+      print(datetime);
       // print(offset);
       DateFormat format = DateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
       try {
         DateTime now = format.parse(datetime);
-        // print(now);
+        print(now);
         // now = now.add(Duration(hours: int.parse(offset)));
         // time = now.toString();
         time = DateFormat.jm().format(now);
