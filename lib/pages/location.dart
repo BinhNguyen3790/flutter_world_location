@@ -11,8 +11,14 @@ class Locations extends StatefulWidget {
 class _LocationsState extends State<Locations> {
   List<WorldTime> locations = [
     WorldTime(location: "Viet Nam", flag: "vn.png", url: "Asia/Ho_Chi_Minh"),
-    WorldTime(location: "London", flag: "uk.png", url: "Europe/London"),
     WorldTime(location: "New York", flag: "usa.png", url: "America/New_York"),
+    WorldTime(location: "London", flag: "uk.png", url: "Europe/London"),
+    WorldTime(location: 'Athens', flag: 'greece.png', url: 'Europe/Berlin'),
+    WorldTime(location: 'Cairo', flag: 'egypt.png', url: 'Africa/Cairo'),
+    WorldTime(location: 'Nairobi', flag: 'kenya.png', url: 'Africa/Nairobi'),
+    WorldTime(location: 'Chicago', flag: 'usa.png', url: 'America/Chicago'),
+    WorldTime(location: 'Seoul', flag: 'south_korea.png', url: 'Asia/Seoul'),
+    WorldTime(location: 'Jakarta', flag: 'indonesia.png', url: 'Asia/Jakarta'),
   ];
 
   void handleTime(index) async {
